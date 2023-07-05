@@ -1,12 +1,20 @@
-import './App.css';
-import ColoredTagInput from './components/colored-tag-input';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import './App.scss';
+import ColoredTagInput from 'src/components/colored-tag-input';
 
 
 function App() {
   return (
-    <div className="App">
-      <ColoredTagInput />
-    </div>
+    <Container>
+      <Row className="justify-content-center">
+        <Col md={5}>
+          <ColoredTagInput />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
