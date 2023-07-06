@@ -8,7 +8,7 @@ import ColoredTagInput from 'src/components/colored-tag-input';
 
 function App() {
   return (
-    <Container>
+    <Container className="m-2">
       <Row className="justify-content-center">
         <Col md={5}>
           <ColoredTagInput />
