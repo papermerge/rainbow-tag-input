@@ -18,7 +18,7 @@ function ColoredTagComponent({
 
   return (
     <span
-      className="badge"
+      className="badge m-1"
       style={{backgroundColor: value.bg_color, color: value.fg_color}}>
         {value.name}
         <button className='btn btn-sm' onClick={onRemoveHandler}>
