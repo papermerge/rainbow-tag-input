@@ -9,7 +9,8 @@ type Args = {
   onChange: (tags: ColoredTagType[]) => void;
 }
 
-export default function ColoredTagInput({
+
+function ColoredTagInput({
   initial_tags,
   autocomplete_tags,
   onChange
@@ -91,3 +92,6 @@ export default function ColoredTagInput({
     </div>
   );
 }
+
+
+export default ColoredTagInput;

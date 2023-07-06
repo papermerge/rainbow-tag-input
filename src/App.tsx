@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 import './App.scss';
 import ColoredTagInput from 'src/components/colored-tag-input';
+import RainbowTags from 'src/components/rainbow-tags';
 
 import type { ColoredTagType } from 'src/types';
 
@@ -50,6 +51,11 @@ function App() {
             initial_tags={initial_tags}
             autocomplete_tags={autocomplete_tags}
             onChange={onChange} />
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col md={5}>
+          <RainbowTags />
         </Col>
       </Row>
     </Container>

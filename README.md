@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Rainbow Tag Input Component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React component for displaying and editing coloring tags
 
 ## Available Scripts
 
