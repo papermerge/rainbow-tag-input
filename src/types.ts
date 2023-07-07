@@ -9,5 +9,5 @@ export type ColoredTagType = {
 export type State<T> = {
   is_loading: boolean;
   error: string | null;
-  data: T | null;
+  data: T[];
 }

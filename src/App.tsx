@@ -45,6 +45,7 @@ function App() {
 
   return (
     <Container className="m-2">
+      Static tags:
       <Row className="justify-content-center">
         <Col md={5}>
           <ColoredTagInput
@@ -53,9 +54,10 @@ function App() {
             onChange={onChange} />
         </Col>
       </Row>
+      Load data from remote server:
       <Row className="justify-content-center">
         <Col md={5}>
-          <RainbowTags />
+          <RainbowTags initial_tags={initial_tags} onChange={onChange}/>
         </Col>
       </Row>
     </Container>

@@ -20,6 +20,7 @@ function ColoredTagInput({
 
   let colored_tags;
   let autocomplete_tag_options;
+  const uniq_datalist_id = Math.random().toString(36);
 
 
   const new_tag = (tag_name: string, autocomplete_tags: ColoredTagType[]): ColoredTagType => {
@@ -29,7 +30,7 @@ function ColoredTagInput({
     let trimmed_name = tag_name.replace(',', '');
     let found_tag: ColoredTagType | undefined;
 
-    found_tag = autocomplete_tags.find(value => value.name == trimmed_name)
+    found_tag = autocomplete_tags.find(value => value.name === trimmed_name)
 
     if (found_tag) {
       return found_tag;
@@ -81,12 +82,12 @@ function ColoredTagInput({
       {colored_tags}
       <input
         type="text"
-        list="auto-tags"
+        list={uniq_datalist_id}
         placeholder="enter new tag"
         onKeyDown={onKeyDown}
         onChange={onInputChange}
         value={value} />
-      <datalist id="auto-tags">
+      <datalist id={uniq_datalist_id}>
         {autocomplete_tag_options}
       </datalist>
     </div>

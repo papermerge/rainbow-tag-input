@@ -1,11 +1,20 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect } from "react";
 import type { State, ColoredTagType } from "src/types";
 
 
-type ResultType = State<ColoredTagType[]>;
+type ResultType = State<ColoredTagType>;
 
 
-function useAutocompleteTags(endpoint: string): ResultType {
+function pull_user_tags(endpoint_url: string, headers: HeadersInit) {
+  return fetch(endpoint_url, {headers: headers}).then(res => {
+    if (res.status == 200) {
+      return res.json();
+    }
+  })
+}
+
+
+function useAutocompleteTags(endpoint_url: string, headers: HeadersInit): ResultType {
 
   const initial_state: ResultType = {
     is_loading: true,
@@ -14,9 +23,17 @@ function useAutocompleteTags(endpoint: string): ResultType {
   };
   const [autocomplete_tags, setAutocompleteTags] = useState<ResultType>(initial_state);
 
-  
+  useEffect(() => {
+    pull_user_tags(endpoint_url, headers).then(data => {
+      setAutocompleteTags({
+          is_loading: false,
+          error: null,
+          data: data
+      });
+    });
+  }, [endpoint_url]);
 
-  return initial_state;
+  return autocomplete_tags;
 }
 
 
