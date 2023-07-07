@@ -6,24 +6,33 @@ import type { ColoredTagType } from 'src/types';
 
 
 type Args = {
+  endpoint_url: string;
+  headers: HeadersInit;
   initial_tags: ColoredTagType[];
   onChange: (tags: ColoredTagType[]) => void;
 }
 
 
-function RainbowTags({initial_tags, onChange}: Args) {
+function RainbowTags({
+  initial_tags,
+  onChange,
+  headers,
+  endpoint_url
+}: Args) {
   /*
   Colored Tag Input component which loads autocomplete tags from remote REST API endpoint.
+
+  initial_tags: list of tags already present in tag list
+  endpoint_url: endpoint where to load autocomplete tags from
+  headers: HTTP headers used for authentication of the endpoint_url
   */
-  const {is_loading, error, data} = useAutocompleteTags(
-    'http://localhost:9000/api/tags', []
-  )
+  const {is_loading, error, data} = useAutocompleteTags(endpoint_url, headers);
 
   if (is_loading) {
     return (
-      <Placeholder animation="glow">
-         <Placeholder md={6} />
-      </Placeholder>
+      <p className="placeholder-glow">
+        <span className="placeholder col-12 placeholder-lg"></span>
+      </p>
      );
   }
 

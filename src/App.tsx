@@ -1,15 +1,22 @@
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Placeholder } from 'react-bootstrap';
 
 import './App.scss';
-import ColoredTagInput from 'src/components/colored-tag-input';
 import RainbowTags from 'src/components/rainbow-tags';
 
 import type { ColoredTagType } from 'src/types';
+import { Button } from 'react-bootstrap';
 
 
 function App() {
+  const [show_tags, setShowTags] = useState(false);
+
+  const endpoint_url: string = 'http://localhost:9000/api/tags';
+  const headers: HeadersInit = [];
+
   let initial_tags: ColoredTagType[] = [
     {
       name: "important",
@@ -22,18 +29,6 @@ function App() {
       bg_color: "blue"
     },
   ];
-  let autocomplete_tags: ColoredTagType[] = [
-    {
-      name: "awo",
-      fg_color: "white",
-      bg_color: "#aa5151"
-    },
-    {
-      name: "bvg",
-      fg_color: "white",
-      bg_color: "#293778"
-    }
-  ];
 
   const onChange = (tags: ColoredTagType[]) => {
     console.log(`Current list of tags is:`);
@@ -43,21 +38,26 @@ function App() {
     }
   }
 
+  const onClick = () => {
+    setShowTags(!show_tags);
+  }
+
   return (
     <Container className="m-2">
-      Static tags:
-      <Row className="justify-content-center">
-        <Col md={5}>
-          <ColoredTagInput
-            initial_tags={initial_tags}
-            autocomplete_tags={autocomplete_tags}
-            onChange={onChange} />
+      <Row>
+        <Col>
+          <Button onClick={onClick}>
+            {show_tags ? "hide tags" : "show tags"}
+          </Button>
         </Col>
       </Row>
-      Load data from remote server:
       <Row className="justify-content-center">
-        <Col md={5}>
-          <RainbowTags initial_tags={initial_tags} onChange={onChange}/>
+        <Col>
+          {show_tags && <RainbowTags
+            endpoint_url={endpoint_url}
+            headers={headers}
+            initial_tags={initial_tags}
+            onChange={onChange} />}
         </Col>
       </Row>
     </Container>

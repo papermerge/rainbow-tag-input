@@ -21,11 +21,11 @@ function ColoredTagComponent({
       className="badge m-1"
       style={{backgroundColor: value.bg_color, color: value.fg_color}}>
         {value.name}
-        <button className='btn btn-sm' onClick={onRemoveHandler}>
+        <span className='close' onClick={onRemoveHandler}>
           <i className='bi bi-x' style={{color: value.fg_color}}></i>
-        </button>
+        </span>
     </span>
-  )
+  );
 }
 
 

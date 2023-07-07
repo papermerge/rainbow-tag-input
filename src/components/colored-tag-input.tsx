@@ -27,17 +27,16 @@ function ColoredTagInput({
     /*
       Creates a complete ColoredTag object from a given tag_name
     */
-    let trimmed_name = tag_name.replace(',', '');
     let found_tag: ColoredTagType | undefined;
 
-    found_tag = autocomplete_tags.find(value => value.name === trimmed_name)
+    found_tag = autocomplete_tags.find(value => value.name === tag_name)
 
     if (found_tag) {
       return found_tag;
     }
 
     return {
-      name: trimmed_name,
+      name: tag_name,
       fg_color: 'white',
       bg_color: 'green'
     }
@@ -48,6 +47,12 @@ function ColoredTagInput({
     const currentValue = value.trim()
 
     if (key === 'Tab' && currentValue !== '') {
+      if (current_tags.find(v => v.name === currentValue)) {
+        // such tag already exists in the list i.e. duplicate
+        event.preventDefault();
+        setValue('');
+        return;
+      }
       let new_tag_list = [
         ...current_tags, new_tag(currentValue, autocomplete_tags)
       ];
